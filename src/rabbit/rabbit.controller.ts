@@ -11,9 +11,10 @@ import {
 import { RabbitService } from './rabbit.service';
 import { CreateRabbitDto } from './dto/create-rabbit.dto';
 import { UpdateRabbitDto } from './dto/update-rabbit.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Rabbit } from './entities/rabbit.entity';
 
+@ApiTags('Rabbits')
 @Controller('rabbit')
 export class RabbitController {
   constructor(private readonly rabbitService: RabbitService) {}
@@ -26,7 +27,6 @@ export class RabbitController {
   })
   @Post()
   create(@Body() createRabbitDto: CreateRabbitDto) {
-    console.log(createRabbitDto);
     return this.rabbitService.create(createRabbitDto);
   }
 
@@ -51,11 +51,22 @@ export class RabbitController {
   }
 
   @Patch(':id')
+  @ApiOperation({ summary: 'Изменение записи кролика' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Кролик был успешно изменен',
+    type: Rabbit,
+  })
   update(@Param('id') id: string, @Body() updateRabbitDto: UpdateRabbitDto) {
     return this.rabbitService.update(+id, updateRabbitDto);
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Удаление записи кролика' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Кролик был успешно удален',
+  })
   remove(@Param('id') id: string) {
     return this.rabbitService.remove(+id);
   }
