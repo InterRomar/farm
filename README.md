@@ -1,6 +1,6 @@
 ## Before installing
 
-Add .env files:
+Add .env files to the root of project:
 ```bash
 $ .development.env
 ```
