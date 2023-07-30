@@ -39,6 +39,7 @@ export class RabbitController {
   })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad Request' })
   findAll() {
+    console.log('GET ALL RABBITS');
     return this.rabbitService.findAll();
   }
 
