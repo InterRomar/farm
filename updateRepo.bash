@@ -22,7 +22,7 @@ https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
 
 git pull origin $PROJECTS_BRANCH
 
-cd $prodDir && docker-compose up -d --build
+docker-compose up -d --build
 
 curl -F chat_id=$TELEGRAM_ADMIN_CHAT -F text="finish deploy ${BASE_DOMAIN}" \
 https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
