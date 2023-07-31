@@ -7,6 +7,6 @@ export class AppController {
 
   @Get()
   getHello() {
-    return '!!! Updated message to test auto deployment!!! ';
+    return 'HELLO from NestJS';
   }
 }
