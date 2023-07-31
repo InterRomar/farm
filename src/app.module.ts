@@ -15,7 +15,7 @@ import { Mating } from './mating/entities/mating.entity';
   imports: [
     RabbitModule,
     ConfigModule.forRoot({
-      envFilePath: `.${process.env.NODE_ENV}.env`,
+      envFilePath: `.env`,
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',

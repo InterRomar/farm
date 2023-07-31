@@ -1,15 +1,13 @@
 version: "3"
 
 services:
-  app:
+  farm-api:
     image: node:18-alpine
     build:
       context: ${SERVICE_SRC_DIR}
       dockerfile: Dockerfile
     expose:
       - ${PORT}
-    env_file:
-      - .development.env
     environment:
       - VIRTUAL_HOST=${SERVICE_DOMAIN}
       - LETSENCRYPT_HOST=${SERVICE_DOMAIN}
