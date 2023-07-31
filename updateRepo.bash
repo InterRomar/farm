@@ -17,7 +17,7 @@ if [  -z "$@" ]
 fi
 echo "Working branch " $branch
 
-curl -F chat_id=$TELEGRAM_ADMIN_CHAT -F text="start deploy ${$SERVICE_DOMAIN}  ${branch}" \
+curl -F chat_id=$TELEGRAM_ADMIN_CHAT -F text="start deploy $SERVICE_DOMAIN  ${branch}" \
 https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
 
 git pull origin $PROJECTS_BRANCH
@@ -28,5 +28,5 @@ nest build
 
 docker-compose up -d --build
 
-curl -F chat_id=$TELEGRAM_ADMIN_CHAT -F text="finish deploy ${$SERVICE_DOMAIN}" \
+curl -F chat_id=$TELEGRAM_ADMIN_CHAT -F text="finish deploy $SERVICE_DOMAIN" \
 https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
