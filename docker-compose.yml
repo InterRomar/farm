@@ -39,9 +39,8 @@ services:
 
 networks:
   reverse-proxy:
-    default:
+    external:
       name: reverse-proxy
-      external: true
   back:
     driver: bridge
 
