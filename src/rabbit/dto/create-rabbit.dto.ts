@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { RabbitGender } from '../entities/rabbit.entity';
+import RabbitGender from '../enums/RabbitGender';
 
 export class CreateRabbitDto {
   @ApiProperty({ description: 'Уникальное имя кролика', example: 'Ночка' })

@@ -1,11 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Mating } from 'src/mating/entities/mating.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-export enum RabbitGender {
-  male = 'male',
-  female = 'female',
-}
+import { Mating } from 'src/mating/entities/mating.entity';
+import RabbitGender from '../enums/RabbitGender';
 
 @Entity('rabbits')
 export class Rabbit {
