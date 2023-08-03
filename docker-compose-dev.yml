@@ -1,5 +1,6 @@
 services:
   farm-api:
+    container_name: farm-api
     image: node:18-alpine
     command: sh -c "npm install && npm run start:dev"
     ports:
@@ -22,6 +23,7 @@ services:
     ports:
       - 54320:5432
   redis:
+    container_name: redis
     image: redis:6.2-alpine
     restart: always
     ports:
