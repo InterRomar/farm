@@ -7,11 +7,14 @@ import {
   Param,
   Delete,
   HttpStatus,
+  UseInterceptors,
 } from '@nestjs/common';
+import { CacheInterceptor } from '@nestjs/cache-manager';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { RabbitService } from './rabbit.service';
 import { CreateRabbitDto } from './dto/create-rabbit.dto';
 import { UpdateRabbitDto } from './dto/update-rabbit.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Rabbit } from './entities/rabbit.entity';
 
 @ApiTags('Rabbits')
@@ -31,6 +34,7 @@ export class RabbitController {
   }
 
   @Get()
+  @UseInterceptors(CacheInterceptor)
   @ApiOperation({ summary: 'Получение списка всех кроликов' })
   @ApiResponse({
     status: HttpStatus.OK,

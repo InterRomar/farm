@@ -1,14 +1,19 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { DataSource, Repository } from 'typeorm';
+import { Cache } from 'cache-manager';
+
 import { CreateRabbitDto } from './dto/create-rabbit.dto';
 import { UpdateRabbitDto } from './dto/update-rabbit.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Rabbit } from './entities/rabbit.entity';
-import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
 export class RabbitService {
   constructor(
+    @Inject(CACHE_MANAGER)
+    private cacheManager: Cache,
     @InjectRepository(Rabbit)
     private rabbitRepository: Repository<Rabbit>,
     private dataSource: DataSource,

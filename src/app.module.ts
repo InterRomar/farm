@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
+import { CacheModule } from '@nestjs/cache-manager';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RabbitModule } from './rabbit/rabbit.module';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Rabbit } from './rabbit/entities/rabbit.entity';
 import { MatingModule } from './mating/mating.module';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
@@ -29,6 +31,9 @@ import { Mating } from './mating/entities/mating.entity';
       namingStrategy: new SnakeNamingStrategy(),
     }),
     MatingModule,
+    CacheModule.register({
+      isGlobal: true,
+    }),
   ],
 })
 export class AppModule {}
