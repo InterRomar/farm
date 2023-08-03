@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
 import { CacheModule } from '@nestjs/cache-manager';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RabbitModule } from './rabbit/rabbit.module';
-import { Rabbit } from './rabbit/entities/rabbit.entity';
 import { MatingModule } from './mating/mating.module';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { Mating } from './mating/entities/mating.entity';
+import configuration from './config';
 
 @Module({
   controllers: [AppController],
@@ -17,18 +15,14 @@ import { Mating } from './mating/entities/mating.entity';
   imports: [
     RabbitModule,
     ConfigModule.forRoot({
-      envFilePath: `.env`,
+      isGlobal: true,
+      load: [configuration],
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.POSTGRES_HOST,
-      port: +process.env.POSTGRES_PORT,
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DATABASE,
-      entities: [Rabbit, Mating],
-      synchronize: true,
-      namingStrategy: new SnakeNamingStrategy(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) =>
+        configService.get('database'),
+      inject: [ConfigService],
     }),
     MatingModule,
     CacheModule.register({
