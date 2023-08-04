@@ -9,6 +9,8 @@ import {
   HttpStatus,
   UseInterceptors,
   UseGuards,
+  ParseIntPipe,
+  UsePipes,
 } from '@nestjs/common';
 import { CacheInterceptor } from '@nestjs/cache-manager';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -19,6 +21,7 @@ import { UpdateRabbitDto } from './dto/update-rabbit.dto';
 import { Rabbit } from './entities/rabbit.entity';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { RolesGuard } from 'src/common/guards/roles.guard';
+import { ValidationPipe } from '@nestjs/common';
 
 @ApiTags('Rabbits')
 @Controller('rabbit')
@@ -33,6 +36,7 @@ export class RabbitController {
     type: Rabbit,
   })
   @Post()
+  @UsePipes(ValidationPipe)
   create(@Body() createRabbitDto: CreateRabbitDto) {
     return this.rabbitService.create(createRabbitDto);
   }
@@ -55,8 +59,8 @@ export class RabbitController {
   @ApiOperation({ summary: 'Получение одного кролика по ID' })
   @ApiResponse({ status: HttpStatus.OK, description: 'Success', type: Rabbit })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad Request' })
-  findOne(@Param('id') id: string) {
-    return this.rabbitService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.rabbitService.findOne(id);
   }
 
   @Patch(':id')
@@ -66,8 +70,11 @@ export class RabbitController {
     description: 'Кролик был успешно изменен',
     type: Rabbit,
   })
-  update(@Param('id') id: string, @Body() updateRabbitDto: UpdateRabbitDto) {
-    return this.rabbitService.update(+id, updateRabbitDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateRabbitDto: UpdateRabbitDto,
+  ) {
+    return this.rabbitService.update(id, updateRabbitDto);
   }
 
   @Delete(':id')
@@ -76,7 +83,7 @@ export class RabbitController {
     status: HttpStatus.OK,
     description: 'Кролик был успешно удален',
   })
-  remove(@Param('id') id: string) {
-    return this.rabbitService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.rabbitService.remove(id);
   }
 }

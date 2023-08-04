@@ -8,6 +8,7 @@ import {
   Delete,
   HttpStatus,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -54,8 +55,8 @@ export class MatingController {
   @ApiOperation({ summary: 'Получение одной случки по ID' })
   @ApiResponse({ status: HttpStatus.OK, description: 'Success', type: Mating })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad Request' })
-  findOne(@Param('id') id: string) {
-    return this.matingService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.matingService.findOne(id);
   }
 
   @Patch(':id')
@@ -65,8 +66,11 @@ export class MatingController {
     description: 'Случка был успешно изменен',
     type: Rabbit,
   })
-  update(@Param('id') id: string, @Body() updateMatingDto: UpdateMatingDto) {
-    return this.matingService.update(+id, updateMatingDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateMatingDto: UpdateMatingDto,
+  ) {
+    return this.matingService.update(id, updateMatingDto);
   }
 
   @Delete(':id')
@@ -75,7 +79,7 @@ export class MatingController {
     status: HttpStatus.OK,
     description: 'Случка был успешно удален',
   })
-  remove(@Param('id') id: string) {
-    return this.matingService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.matingService.remove(id);
   }
 }
