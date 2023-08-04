@@ -5,10 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { RabbitModule } from './rabbit/rabbit.module';
-import { MatingModule } from './mating/mating.module';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import { RabbitModule } from './modules/rabbit/rabbit.module';
+import { MatingModule } from './modules/mating/mating.module';
+import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
 import configuration from './config';
 
 @Module({

@@ -12,7 +12,7 @@ import { MatingService } from './mating.service';
 import { CreateMatingDto } from './dto/create-mating.dto';
 import { UpdateMatingDto } from './dto/update-mating.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Rabbit } from 'src/rabbit/entities/rabbit.entity';
+import { Rabbit } from 'src/modules/rabbit/entities/rabbit.entity';
 import { Mating } from './entities/mating.entity';
 
 @ApiTags('Matings')

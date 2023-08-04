@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Mating } from 'src/mating/entities/mating.entity';
+import { Mating } from 'src/modules/mating/entities/mating.entity';
 import RabbitGender from '../enums/RabbitGender';
 
 @Entity('rabbits')

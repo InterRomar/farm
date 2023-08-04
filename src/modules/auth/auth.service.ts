@@ -8,8 +8,8 @@ import * as bcrypt from 'bcrypt';
 import { DataSource } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 
-import { User } from 'src/user/entities/user.entity';
-import { UserService } from 'src/user/user.service';
+import { User } from 'src/modules/user/entities/user.entity';
+import { UserService } from 'src/modules/user/user.service';
 
 @Injectable()
 export class AuthService {

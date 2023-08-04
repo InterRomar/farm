@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Rabbit } from 'src/rabbit/entities/rabbit.entity';
+import { Rabbit } from 'src/modules/rabbit/entities/rabbit.entity';
 import {
   Column,
   Entity,
