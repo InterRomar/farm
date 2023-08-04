@@ -7,16 +7,24 @@ import {
   Param,
   Delete,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { MatingService } from './mating.service';
 import { CreateMatingDto } from './dto/create-mating.dto';
 import { UpdateMatingDto } from './dto/update-mating.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Rabbit } from 'src/modules/rabbit/entities/rabbit.entity';
 import { Mating } from './entities/mating.entity';
+import { Role } from 'src/common/decorators/roles.decorator';
+import UserRole from 'src/modules/user/enums/UserRole';
+import { AuthGuard } from 'src/common/guards/auth.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @ApiTags('Matings')
 @Controller('mating')
+@Role(UserRole.user)
+@UseGuards(AuthGuard, RolesGuard)
 export class MatingController {
   constructor(private readonly matingService: MatingService) {}
 

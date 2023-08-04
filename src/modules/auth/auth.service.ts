@@ -1,6 +1,5 @@
 import {
   Injectable,
-  Logger,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -38,7 +37,11 @@ export class AuthService {
       throw new UnauthorizedException({ message: 'Wrong password' });
     }
 
-    const payload = { sub: userRecord.id, login: userRecord.login };
+    const payload = {
+      sub: userRecord.id,
+      login: userRecord.login,
+      role: userRecord.role,
+    };
 
     return {
       access_token: await this.jwtService.signAsync(payload),

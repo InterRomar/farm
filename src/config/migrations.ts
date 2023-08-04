@@ -14,3 +14,5 @@ const migrationsConfig = {
 export const connectionSource = new DataSource(
   migrationsConfig as DataSourceOptions,
 );
+
+export default connectionSource;

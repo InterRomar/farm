@@ -8,6 +8,7 @@ import {
   Delete,
   HttpStatus,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { CacheInterceptor } from '@nestjs/cache-manager';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -16,9 +17,12 @@ import { RabbitService } from './rabbit.service';
 import { CreateRabbitDto } from './dto/create-rabbit.dto';
 import { UpdateRabbitDto } from './dto/update-rabbit.dto';
 import { Rabbit } from './entities/rabbit.entity';
+import { AuthGuard } from 'src/common/guards/auth.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @ApiTags('Rabbits')
 @Controller('rabbit')
+@UseGuards(AuthGuard, RolesGuard)
 export class RabbitController {
   constructor(private readonly rabbitService: RabbitService) {}
 
