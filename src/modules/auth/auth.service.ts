@@ -37,11 +37,7 @@ export class AuthService {
       throw new UnauthorizedException({ message: 'Wrong password' });
     }
 
-    const payload = {
-      sub: userRecord.id,
-      login: userRecord.login,
-      role: userRecord.role,
-    };
+    const { password: pass, ...payload } = userRecord;
 
     return {
       access_token: await this.jwtService.signAsync(payload),
