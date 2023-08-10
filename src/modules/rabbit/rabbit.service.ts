@@ -3,10 +3,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { DataSource, Repository } from 'typeorm';
 import { Cache } from 'cache-manager';
+import { InjectRepository } from '@nestjs/typeorm';
 
 import { CreateRabbitDto } from './dto/create-rabbit.dto';
 import { UpdateRabbitDto } from './dto/update-rabbit.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Rabbit } from './entities/rabbit.entity';
 
 @Injectable()
@@ -24,7 +24,6 @@ export class RabbitService {
   }
 
   findAll(): Promise<Rabbit[]> {
-    console.log(new Date().toISOString());
     return this.rabbitRepository.find();
   }
 

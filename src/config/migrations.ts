@@ -11,8 +11,6 @@ const migrationsConfig = {
   port: parseInt(process.env.LOCAL_POSTGRES_PORT, 10),
 };
 
-export const connectionSource = new DataSource(
-  migrationsConfig as DataSourceOptions,
-);
+const connectionSource = new DataSource(migrationsConfig as DataSourceOptions);
 
 export default connectionSource;
