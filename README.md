@@ -1,56 +1,42 @@
+## Preview
+- Project designed from scratch (without using any prepared boilerplates or templates)
+- Using the basic features and techniques of NestJS
+- Two docker-compose files for DEV and for PROD
+- Project now is available in the "Production"
+
 ## Before installing
 
-Add .env files to the root of project:
+Replace .env.example file with the .env file, and put values there
 ```bash
-$ .development.env
-```
-or
-```bash
-$ .production.env
-```
-
-## Installation
-
-```bash
-$ npm install
+$ .env.example --> .env
 ```
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
+# run DEV docker-compose
+$ make dev
 
-# watch mode
-$ npm run start:dev
+# run PROD docker-compose
+$ make prod
 
-# production mode
-$ npm run start:prod
+# stop Docker containers
+$ make stop
 ```
 
-## Test
+## Migrations
 
 ```bash
-# unit tests
-$ npm run test
+# Generate a migration
+$ npm run migration:generate
 
-# e2e tests
-$ npm run test:e2e
+# Run migrations
+$ npm run migration:run
 
-# test coverage
-$ npm run test:cov
+# Revert last migration
+$ npm run migration:revert
 ```
 
-## Support
+## Swagger (API docs)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+> /api/docs
