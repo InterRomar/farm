@@ -24,6 +24,8 @@ git pull origin $PROJECTS_BRANCH
 
 rm -rf $PWD/dist
 
+npm install
+
 nest build
 
 docker-compose up -d --build
