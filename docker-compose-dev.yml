@@ -23,6 +23,20 @@ services:
     # 54320 port for accessing from the local machine
     ports:
       - 54320:5432
+  
+  mongo:
+    container_name: mongo
+    image: 'mongo:4.2.16-bionic'
+    ports:
+      -  27017:27017
+    restart: always
+    volumes:
+      - mongodata:/var/lig/mongodb/data
+    environment:
+      MONGO_INITDB_DATABASE:  ${MONGO_INITDB_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
   redis:
     container_name: redis
     image: redis:6.2-alpine
@@ -35,5 +49,6 @@ services:
 
 volumes:
   pgdata:
+  mongodata:
   redis:
     driver: local
