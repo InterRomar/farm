@@ -25,7 +25,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 @ApiTags('Rabbits')
 @Controller('rabbit')
-@UseGuards(AuthGuard, RolesGuard)
+// @UseGuards(AuthGuard, RolesGuard)
 export class RabbitController {
   constructor(private readonly rabbitService: RabbitService) {}
 
